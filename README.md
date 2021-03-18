@@ -6,7 +6,7 @@
 
 ### 
 ```
-char identity[14];
+	char identity[14];
 	cout << "주민등록번호 13자리를 입력하시오 : ";
 	cin >> identity;
 
