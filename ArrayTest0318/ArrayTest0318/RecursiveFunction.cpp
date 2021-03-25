@@ -1,3 +1,4 @@
+// 20303 김경혁
 #include<iostream>
 using namespace std;
 
@@ -10,9 +11,9 @@ int main() {
 	cout << "1부터" << a << "까지의 곱은 " << Factorial(a) <<endl;
 
 	cout << "\n2.가우스 : ";
-	cin >> a;
+	a = 100;
 	cout << "1부터" << a << "까지의 합은 " << ((1+a)*a)/2 << endl;
-
+	a = 10;
 	cout << "\n3.재귀함수 사용 가우스 : ";
 	cin >> a;
 	cout <<"1부터"<<a<<"까지의 합은 "<<Gauss(a)<<endl;
