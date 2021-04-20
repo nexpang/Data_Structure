@@ -1,25 +1,18 @@
 // 20303 김경혁 
-// stack 실습1-2
+// stack 실습1-3
 #include <iostream>
 #include <stack>
-#include <conio.h>
 
 using namespace std;
 
 int main() {
 	stack<int> i_s;
-	const int arrSize = 5;
+	const int arrSize = 3;
 	int c_arr[arrSize] = { 0, };
-	char ch;
-	cout << "2. 숫자 거꾸로 출력하기\n5 자리 숫자를 입력하세요.";
+	cout << "3. 세 정수 거꾸로 출력하기\n정수 3개를 입력하세요.\n";
 	for (int i = 0; i < arrSize; i++) {
-		ch = _getch();
-		if (ch - 48 < 0 || ch - 48 > 9) {
-			cout << "\n0~9숫자만 입력하시오";
-			return 0;
-		}
-		c_arr[i] = (int)ch - 48;
-		cout << c_arr[i];
+		cout << i+1 << "번째 정수를 입력하시오 : ";
+		cin >> c_arr[i];
 	}
 	cout << endl;
 	//cin.getline(c_arr,arrSize);
@@ -28,7 +21,7 @@ int main() {
 	}
 	for (int i = 0; i < arrSize; i++) {
 		if (!i_s.empty()) {
-			cout << i_s.top();
+			cout << i+1 <<". "<<i_s.top()<<endl;
 			i_s.pop();
 		}
 	}

@@ -1,4 +1,5 @@
 // 20303 ±Ë∞Ê«ı
+// stack Ω«Ω¿1-1
 #include <iostream>
 #include <stack>
 
