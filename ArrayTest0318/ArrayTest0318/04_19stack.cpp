@@ -1,5 +1,5 @@
 // 20303 김경혁
-// stack 실습1-1
+// stack 실습2-보너스포함
 // 이준협 - 미로 랜덤을 어떻게 할지 도움을 줌
 #include <iostream>
 #include <stack>
