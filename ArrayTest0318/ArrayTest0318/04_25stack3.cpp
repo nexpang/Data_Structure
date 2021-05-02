@@ -194,8 +194,9 @@ bool isFull(stack<int> s, int i) {
 		return true;
 	}
 	return false;
-}*/
-
+}
+*/
+/*
 // 20303 ±è°æÇõ
 // stack ½Ç½À3-3
 // stack »ç¿ëÇÔ
@@ -264,4 +265,4 @@ bool isFull(stack<char> s, int i) {
 		return true;
 	}
 	return false;
-}
+}*/
