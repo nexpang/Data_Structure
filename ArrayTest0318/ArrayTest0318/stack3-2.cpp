@@ -1,121 +1,138 @@
 // 20303 김경혁
 // stack 실습3-2
+// 참고 : https://penglog.tistory.com/99
+// 문제에 맞게 변환함
 #include <iostream>
-#include <stack> 
+#include <stack>
 
 using namespace std;
 
-bool isFull(stack<long>, int);
+struct oper {
+	int p;
+	char o;
+};
 
-long oper(long, long, char);
+bool numFirst = false;
+stack<long> i_sNum;
+stack<int> i_stack;
+stack<oper> o_stack;
+
+void calc() {
+	int num1, num2, r;
+	num2 = i_sNum.top();
+	i_sNum.pop();
+	num1 = i_sNum.top();
+	i_sNum.pop();
+	char oper = o_stack.top().o;
+	o_stack.pop();
+
+	switch (oper)
+	{
+	case '*':
+		r = num1 * num2;
+		break;
+	case '/':
+		r = num1 / num2;
+		break;
+	case '+':
+		r = num1 + num2;
+		break;
+	case '-':
+		r = num1 - num2;
+		break;
+	default:
+		r = 0;
+		break;
+	}
+	i_sNum.push(r);
+	cout << "operate : " << r << endl;
+}
 
 int main() {
-	stack<long> num_s;
-	stack<long> i_s;
-	stack<char> c_s;
-	int sSize = 10;
-	int cSize = 10;
 
-	bool b = false;
-	string s = "";
-	cin >> s;
+	string s = "1+(123/123-1+1+2)/2-1"; // 빈칸이 없는 수식
+	cout << "Calculation : " << s << endl;
+	cout << endl;
 	for (int i = 0; i < s.length(); i++)
 	{
 		if (s[i] == '(') {
-			b = true;
-			c_s.push(s[i]);
+			o_stack.push({ 0, s[i] });
 		}
 		else if (s[i] == ')') {
-			if (b) {
-				while (c_s.top() != '(') {
-					
+			while (o_stack.top().o != '(')
+				calc();
+			o_stack.pop();
+		}
+		else if (s[i] == '+' || s[i] == '-' || s[i] == '*' || s[i] == '/') {
+			//if (!numFirst) i_sNum.push(0);
+			int p;
+			switch (s[i])
+			{
+			case '*':
+				p = 2;
+				break;
+			case '/':
+				p = 2;
+				break;
+			case '+':
+				p = 1;
+				break;
+			case '-':
+				p = 1;
+				break;
+			}
+
+			while (!o_stack.empty() && p <= o_stack.top().p)
+				calc();
+
+			o_stack.push({ p, s[i] });
+		}
+		else if (s[i] >= '0' && s[i] <= '9') {
+			//if (!numFirst) numFirst = true;
+
+			i_stack.push(s[i] - '0');
+			if (i != s.length()-1) {
+				if (s[i + 1] == '+' || s[i + 1] == '-' || s[i + 1] == '*' || s[i + 1] == '/' || s[i + 1] == ')') {
+					int loop = i_stack.size();
+					int num = 0;
+					for (int i = 0; i < loop; i++) {
+						int zegop = 1;
+						for (int j = 0; j < i; j++)
+						{
+							zegop *= 10;
+						}
+						num += (i_stack.top() * zegop);
+						if (!i_stack.empty())
+							i_stack.pop();
+					}
+					i_sNum.push(num);
 				}
 			}
 			else {
-				return 0;
-			}
-		}
-		else if (s[i] >= '0' && s[i] <= '9') {
-			if (i == (s.length()-1)) {
-				i_s.push(s[i] - '0');
-				int r = i_s.size();
-				int num1 = 0;
-
-				for (int j = 0; j < r; j++) {
-					if (!i_s.empty()) {
-						int sqare = 1;
-						for (int k = 0; k < j; k++) {
-							sqare *= 10;
-						}
-						num1 += i_s.top() * sqare;
-						i_s.pop();
+				int loop = i_stack.size();
+				int num = 0;
+				for (int i = 0; i < loop; i++) {
+					int zegop = 1;
+					for (int j = 0; j < i; j++)
+					{
+						zegop *= 10;
 					}
-					else {
-						cout << "stack이 비어있습니다";
-						return 0;
-					}
+					num += (i_stack.top() * zegop);
+					if (!i_stack.empty())
+						i_stack.pop();
 				}
-				num_s.push(num1);
+				i_sNum.push(num);
 			}
-			if (!isFull(i_s, sSize)) {
-				i_s.push(s[i] - '0');
-			}
-		}
-		else if (s[i] == '+' || s[i] == '-' || s[i] == '*' || s[i] == '/') {
-			c_s.push(s[i]);
-
-			int r = i_s.size();
-			int num1 = 0;
-
-			for (int j = 0; j < r; j++) {
-				if (!i_s.empty()) {
-					int sqare = 1;
-					for (int k = 0; k < j; k++) {
-						sqare *= 10;
-					}
-					num1 += i_s.top() * sqare;
-					i_s.pop();
-				}
-				else {
-					cout << "stack이 비어있습니다";
-					return 0;
-				}
-			}
-			num_s.push(num1);
 		}
 		else {
-			cout << "알맞지 않은 값이 입력 되었습니다.";
+			cout << "잘못된 값이 입력되었습니다."; // 숫자가 아닐 때 에러 처리
 			return 0;
-		};
-	}
-	int size = num_s.size();
-	for (int i = 0; i < size; i++)
-	{
-		if (!num_s.empty()) {
-			cout << num_s.top()<<endl;
-			num_s.pop();
 		}
 	}
-	return 0;
-}
-bool isFull(stack<long> s, int i) {
-	if (s.size() == i) {
-		return true;
-	}
-	return false;
-}
+	while (!o_stack.empty())
+		calc();
 
-long oper(long num1, long num2, char oper) {
-	if (oper == '*') {
-		return num1* num2;
-	}
-	else if (oper == '/') {
-		return num1 / num2;
-	}
-	else if (oper == '+') {
-		return num1 + num2;
-	}
-	else if (oper == '-') {
-		return num1 - num2;
-	}
+	cout << "\nresult : " <<i_sNum.top();
+
+	return 0;
 }
