@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="L2Q1.cs" />
     <Compile Remove="Q01.cs" />
     <Compile Remove="Q02.cs" />
     <Compile Remove="Q03.cs" />
@@ -25,9 +26,17 @@
     <Compile Remove="Q17.cs" />
     <Compile Remove="Q18.cs" />
     <Compile Remove="Q19.cs" />
+    <Compile Remove="Q20.cs" />
+    <Compile Remove="Q21.cs" />
+    <Compile Remove="Q22.cs" />
+    <Compile Remove="Q23.cs" />
+    <Compile Remove="Q24.cs" />
+    <Compile Remove="Q25.cs" />
+    <Compile Remove="Q26.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="L2Q1.cs" />
     <None Include="Q01.cs" />
     <None Include="Q02.cs" />
     <None Include="Q03.cs" />
@@ -46,10 +55,17 @@
     <None Include="Q17.cs" />
     <None Include="Q18.cs" />
     <None Include="Q19.cs" />
+    <None Include="Q20.cs" />
+    <None Include="Q21.cs" />
+    <None Include="Q23.cs" />
+    <None Include="Q24.cs" />
+    <None Include="Q25.cs" />
+    <None Include="Q26.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Q05.cs" />
+    <Resource Include="Q22.cs" />
   </ItemGroup>
 
 </Project>
